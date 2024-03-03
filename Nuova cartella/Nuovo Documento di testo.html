@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La mia pagina web</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            max-height: 80vh;
+            border: 2px solid #333;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #000;
+            color: #00ff00;
+            border: none;
+            cursor: pointer;
+        }
+        button.no {
+            background-color: #ff0000; /* Rosso */
+        }
+        #messageContainer {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="startButtons">
+        <h1>Questa è la mia pagina web, vuoi provare?</h1>
+        <button onclick="showImages()">Sì</button>
+        <button class="no" onclick="showMessage()">esc</button>
+    </div>
+    <img id="randomImage" src="Nuova cartella/cityscape1.jpg" alt="Immagine casuale">
+    <div id="messageContainer"></div>
+    <button id="changeImageButton" style="display: none;" onclick="changeImage()">Non ti piace questa immagine? Vuoi un’altra?</button>
+    <button id="startVideoButton" style="display: none;" onclick="startVideo()">Inizia il video</button>
+
+    <script>
+        const images = [
+            'Nuova cartella/cityscape1.jpg', // Sostituisci con gli URL delle altre immagini
+            'Nuova cartella/cityscape2.jpg',
+            'Nuova cartella/cityscape3.jpg',
+            'Nuova cartella/cityscape4.jpg'
+        ];
+        let currentImageIndex = 0;
+
+        function changeImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            document.getElementById('randomImage').src = images[currentImageIndex];
+        }
+
+        function showImages() {
+            document.getElementById('startButtons').style.display = 'none';
+            document.getElementById('randomImage').style.display = 'block';
+            changeImage();
+            document.getElementById('changeImageButton').style.display = 'block'; // Mostra il pulsante per cambiare immagine
+            document.getElementById('startVideoButton').style.display = 'block'; // Mostra il pulsante per iniziare il video
+        }
+
+        function showMessage() {
+            document.getElementById('startButtons').style.display = 'none';
+            document.getElementById('messageContainer').innerText = "Non ti fidi? Ok, faccio tutto da solo.";
+            setTimeout(() => {
+                window.close(); // Chiude la finestra del browser dopo 5 secondi
+            }, 5000);
+        }
+
+        function startVideo() {
+            document.getElementById('randomImage').style.display = 'none';
+            document.getElementById('changeImageButton').style.display = 'none';
+            document.getElementById('startVideoButton').style.display = 'none';
+            const video = document.createElement('video');
+            video.src = 'Nuova cartella/esempio.mp4'; // Inserisci l'URL del video desiderato
+            video.controls = true;
+            document.body.appendChild(video);
+        }
+    </script>
+</body>
+</html>
